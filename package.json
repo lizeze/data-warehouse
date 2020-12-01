@@ -1,19 +1,27 @@
 {
   "name": "data-warehouse",
   "version": "1.0.0",
-  "description": "* 驾照考题数据(整理中)",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "driver-sql": "node src/driver/sql.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "zeze.li",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.21.0",
     "request": "^2.88.2",
     "uuid": "^8.3.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lizeze/data-warehouse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lizeze/data-warehouse/issues"
+  },
+  "homepage": "https://github.com/lizeze/data-warehouse#readme"
 }
