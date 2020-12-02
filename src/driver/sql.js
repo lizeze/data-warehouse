@@ -1,25 +1,10 @@
-const path = require('path');
-const fs = require('fs');
-const {getFileName} = require("../common");
-const {dirExists} = require("../common");
-const {createUUID} = require("../common");
-const {readFile} = require("../common");
+import path from 'path'
+
+import fs from 'fs'
+import common from "../common";
+
 let sqlPath = path.normalize(path.join(__dirname, '../../dist', 'sql', 'driver-license'))
-// let fileDisplay = (subject, model, type) => {
-//     let filePath = path.normalize(path.join(__dirname, '../../data', 'driver-license-license', model, type, subject.toString()))
-//     fs.readdir(filePath, async function (err, files) {
-//         if (err) {
-//         } else {
-//             let sqlText = '';
-//             for (let i = 0; i < files.length; i++) {
-//                 let filedir = path.join(filePath, files[i]);
-//                 // let fileContent = await readFile(filedir);
-//                 sqlText += createSqlText(fileContent);
-//             }
-//             // fs.writeFileSync(`./dist/${level}.sql`, sqlText, { encoding: 'utf8' });
-//         }
-//     });
-// };
+
 
 let createSqlText = (array, subject, model) => {
 
@@ -35,7 +20,7 @@ let createSqlText = (array, subject, model) => {
 
         // explains=explains.replace(/\r\n/g,"<br>")
         // explains=explains.replace(/\n/g,"<br>");
-        sql += `insert into driver_license values ('${createUUID()}', '${item.id}','${subject}','${model}','${item.question}','${item.answer}','${item.item1}','${item.item2}','${item.item3}','${item.item4}','${explains}','${item.url}');\n`
+        sql += `insert into driver_license values ('${common.createUUID()}', '${item.id}','${subject}','${model}','${item.question}','${item.answer}','${item.item1}','${item.item2}','${item.item3}','${item.item4}','${explains}','${item.url}');\n`
     }
     return sql;
 
@@ -45,12 +30,12 @@ let createSqlText = (array, subject, model) => {
 
 let main = () => {
     let filePath = path.normalize(path.join(__dirname, '../../data', 'driver-license'))
-    dirExists(sqlPath)
+    common.dirExists(sqlPath)
 
     fs.readdir(filePath, async (err, files) => {
         for (let i = 0; i < files.length; i++) {
-            let fileContent = await readFile(path.normalize(filePath + "/" + files[i]))
-            let filesItemNames = getFileName(files[i]).split('-');
+            let fileContent = await common.readFile(path.normalize(filePath + "/" + files[i]))
+            let filesItemNames = common.getFileName(files[i]).split('-');
             let model = filesItemNames[0]
             let subject = filesItemNames[1]
             let sql = createSqlText(fileContent, subject, model)

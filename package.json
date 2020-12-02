@@ -4,18 +4,30 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "predriver-sql": "npm run build",
+    "build": "babel src -d build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "driver-sql": "node src/driver/sql.js"
+    "driver-sql": "node build/driver/sql.js",
+    "prestart": "npm run build",
+    "start": "node build/server.js"
   },
   "keywords": [],
   "author": "zeze.li",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.0",
+    "babel-runtime": "^6.26.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
     "request": "^2.88.2",
     "uuid": "^8.3.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.7"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lizeze/data-warehouse.git"
