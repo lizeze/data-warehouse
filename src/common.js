@@ -9,8 +9,7 @@ export default class common {
                 if (!eror) {
                     resolve(JSON.parse(data));
                 } else {
-                    console.log('error');
-                    reject(JSON.stringify({reason: 'error', result: '参数错误', error_code: 400}));
+                    resolve(common.unifyResponse("参数错误", 404));
                 }
             });
         });
@@ -45,6 +44,26 @@ export default class common {
             })
         })
     }
+
+    static unifyResponse(mess, error_code) {
+        return {
+            mess,
+            error_code
+        }
+    }
+
+    static getRandomArrayElements(arr, count) {
+        if (null == arr || arr.length == 0) return []
+        var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
+        while (i-- > min) {
+            index = Math.floor((i + 1) * Math.random());
+            temp = shuffled[index];
+            shuffled[index] = shuffled[i];
+            shuffled[i] = temp;
+        }
+        return shuffled.slice(min);
+    }
+
 
 }
 
